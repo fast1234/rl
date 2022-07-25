@@ -16,7 +16,7 @@ public class SlidingWindowRateLimiter implements RateLimiter{
 
     @Override
     public boolean shouldGrantAccess() {
-        Long currentTime = System.currentTimeMillis()/1000;
+        Long currentTime = System.currentTimeMillis();
         if(timestampQueue.size()<capacity){
             timestampQueue.add(currentTime);
             return true;
@@ -30,13 +30,13 @@ public class SlidingWindowRateLimiter implements RateLimiter{
     }
 
     private void trimQueue(long currentTime){
-        long timeDiff = timestampQueue.peek()-currentTime;
+        long timeDiff = (currentTime-timestampQueue.peek())/1000;
         while(timeDiff>=timeWindow){
             timestampQueue.poll();
             if(timestampQueue.isEmpty()){
                 return;
             }
-            timeDiff = timestampQueue.peek()-currentTime;
+            timeDiff = (currentTime-timestampQueue.peek())/1000;
         }
     }
 }
