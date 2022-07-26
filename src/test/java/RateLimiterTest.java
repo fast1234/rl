@@ -6,8 +6,8 @@ public class RateLimiterTest {
     @Test
     public void ShouldRateLimitHappyCaseOneClient(){
         UserBucket ub = new UserBucket();
-        ub.addUserBucket("C1", 2, 1);
-        Assert.assertEquals(true, ub.allowAccess("C1"));
+        ub.addUser("C1", 2, 1);
+        Assert.assertTrue(ub.allowAccess("C1"));
         Assert.assertEquals(true, ub.allowAccess("C1"));
         Assert.assertEquals(false, ub.allowAccess("C1"));
         Assert.assertEquals(false, ub.allowAccess("C1"));
@@ -17,8 +17,8 @@ public class RateLimiterTest {
     @Test
     public void ShouldRateLimitHappyCaseMultipleClient1() throws InterruptedException {
         UserBucket ub = new UserBucket();
-        ub.addUserBucket("C1", 1, 1);
-        ub.addUserBucket("C2", 1, 1);
+        ub.addUser("C1", 1, 1);
+        ub.addUser("C2", 1, 1);
         Assert.assertEquals(true, ub.allowAccess("C1"));
         Assert.assertEquals(false, ub.allowAccess("C1"));
         Thread.sleep(1500);
@@ -39,8 +39,8 @@ public class RateLimiterTest {
     @Test
     public void TestRateLimitDifferentTimeHits(){
         UserBucket ub = new UserBucket();
-        ub.addUserBucket("C1", 2, 1);
-        ub.addUserBucket("C2", 3, 1);
+        ub.addUser("C1", 2, 1);
+        ub.addUser("C2", 3, 1);
 
 
     }

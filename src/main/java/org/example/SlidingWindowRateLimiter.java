@@ -39,4 +39,8 @@ public class SlidingWindowRateLimiter implements RateLimiter{
             timeDiff = (currentTime-timestampQueue.peek())/1000;
         }
     }
+
+    public void updateCapacity(int capacity){
+        this.capacity = capacity;
+    }
 }

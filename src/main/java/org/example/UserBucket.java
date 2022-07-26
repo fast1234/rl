@@ -10,7 +10,7 @@ public class UserBucket {
         hm = new HashMap<>();
     }
 
-    public void addUserBucket(String id, int capacity, int timewindow){
+    public void addUser(String id, int capacity, int timewindow){
         sl = new SlidingWindowRateLimiter(capacity, timewindow);
         hm.put(id, sl);
     }
